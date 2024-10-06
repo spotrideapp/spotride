@@ -1,4 +1,4 @@
-package com.spotride.spotride.user.dto;
+package com.spotride.spotride.model.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
