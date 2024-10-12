@@ -49,5 +49,4 @@ public class VehiclePhoto {
 
     @LastModifiedDate
     private LocalDateTime modifiedAt;
-
 }
