@@ -1,4 +1,4 @@
-package com.spotride.spotride.user.model;
+package com.spotride.spotride.model.user.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
