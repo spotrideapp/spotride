@@ -9,7 +9,6 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,8 +35,8 @@ public final class UserController {
     UserService userService;
 
     @GetMapping
-    public List<UserResponseDto> getAllUsers() {
-        return userService.getAllUsers();
+    public List<UserResponseDto> getAll() {
+        return userService.getAll();
     }
 
     /**
@@ -47,8 +46,8 @@ public final class UserController {
      * @return {@link ResponseEntity} for user by id
      */
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponseDto> getUserById(@PathVariable long id) {
-        var userResponseDto = userService.getUserById(id);
+    public ResponseEntity<UserResponseDto> getById(@PathVariable long id) {
+        var userResponseDto = userService.getById(id);
 
         return nonNull(userResponseDto) ? ResponseEntity.ok(userResponseDto) : ResponseEntity.notFound().build();
     }
@@ -60,8 +59,8 @@ public final class UserController {
      * @return {@link ResponseEntity} for created user
      */
     @PostMapping
-    public ResponseEntity<UserResponseDto> createUser(@RequestBody @Valid UserCreateRequestDto userDto) {
-        var createdUser = userService.createUser(userDto);
+    public ResponseEntity<UserResponseDto> create(@RequestBody @Valid UserCreateRequestDto userDto) {
+        var createdUser = userService.create(userDto);
 
         return ResponseEntity.ok(createdUser);
     }
@@ -74,8 +73,8 @@ public final class UserController {
      * @return {@link ResponseEntity} for updated user
      */
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponseDto> updateUser(@PathVariable long id, @RequestBody @Valid UserUpdateRequestDto userDto) {
-        var updatedUser = userService.updateUser(id, userDto);
+    public ResponseEntity<UserResponseDto> update(@PathVariable long id, @RequestBody @Valid UserUpdateRequestDto userDto) {
+        var updatedUser = userService.update(id, userDto);
 
         return nonNull(updatedUser) ? ResponseEntity.ok(updatedUser) : ResponseEntity.notFound().build();
     }
@@ -87,8 +86,8 @@ public final class UserController {
      * @return {@link ResponseEntity} for updated user
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable long id) {
-        userService.deleteUser(id);
+    public ResponseEntity<Void> delete(@PathVariable long id) {
+        userService.delete(id);
 
         return ResponseEntity.noContent().build();
     }

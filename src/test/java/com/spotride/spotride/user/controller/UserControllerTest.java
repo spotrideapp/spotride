@@ -38,7 +38,7 @@ class UserControllerTest {
     private UserController userController;
 
     @Test
-    void testGetAllUsers() {
+    void testGetAll() {
         var userDto = UserResponseDto.builder()
                 .id(1L)
                 .username("john")
@@ -50,17 +50,17 @@ class UserControllerTest {
                 .city("CityName")
                 .build();
 
-        when(mockUserService.getAllUsers()).thenReturn(List.of(userDto));
+        when(mockUserService.getAll()).thenReturn(List.of(userDto));
 
-        var result = userController.getAllUsers();
+        var result = userController.getAll();
 
         assertNotNull(result);
         assertEquals(1, result.size());
-        verify(mockUserService, times(1)).getAllUsers();
+        verify(mockUserService, times(1)).getAll();
     }
 
     @Test
-    void testGetUserById() {
+    void testGetById() {
         var userDto = UserResponseDto.builder()
                 .id(1L)
                 .username("john")
@@ -72,18 +72,18 @@ class UserControllerTest {
                 .city("CityName")
                 .build();
 
-        when(mockUserService.getUserById(1L)).thenReturn(userDto);
+        when(mockUserService.getById(1L)).thenReturn(userDto);
 
-        var response = userController.getUserById(1L);
+        var response = userController.getById(1L);
 
         assertNotNull(response);
         assertEquals(200, response.getStatusCode().value());
         assertEquals("john", Objects.requireNonNull(response.getBody()).getUsername());
-        verify(mockUserService, times(1)).getUserById(1L);
+        verify(mockUserService, times(1)).getById(1L);
     }
 
     @Test
-    void testCreateUser() {
+    void testCreate() {
         var userCreateRequestDto = UserCreateRequestDto.builder()
                 .username("john")
                 .password("password")
@@ -107,18 +107,18 @@ class UserControllerTest {
                 .build();
 
 
-        when(mockUserService.createUser(userCreateRequestDto)).thenReturn(createdUserDto);
+        when(mockUserService.create(userCreateRequestDto)).thenReturn(createdUserDto);
 
-        var response = userController.createUser(userCreateRequestDto);
+        var response = userController.create(userCreateRequestDto);
 
         assertNotNull(response);
         assertEquals(200, response.getStatusCode().value());
         assertEquals("john", Objects.requireNonNull(response.getBody()).getUsername());
-        verify(mockUserService, times(1)).createUser(userCreateRequestDto);
+        verify(mockUserService, times(1)).create(userCreateRequestDto);
     }
 
     @Test
-    void testUpdateUser() {
+    void testUpdate() {
         var userUpdateRequestDto = UserUpdateRequestDto.builder()
                 .id(null)
                 .username("john_updated")
@@ -142,24 +142,24 @@ class UserControllerTest {
                 .city("CityName")
                 .build();
 
-        when(mockUserService.updateUser(1L, userUpdateRequestDto)).thenReturn(updatedUserDto);
+        when(mockUserService.update(1L, userUpdateRequestDto)).thenReturn(updatedUserDto);
 
-        var response = userController.updateUser(1L, userUpdateRequestDto);
+        var response = userController.update(1L, userUpdateRequestDto);
 
         assertNotNull(response);
         assertEquals(200, response.getStatusCode().value());
         assertEquals("john_updated", Objects.requireNonNull(response.getBody()).getUsername());
-        verify(mockUserService, times(1)).updateUser(1L, userUpdateRequestDto);
+        verify(mockUserService, times(1)).update(1L, userUpdateRequestDto);
     }
 
     @Test
-    void testDeleteUser() {
-        doNothing().when(mockUserService).deleteUser(1L);
+    void testDelete() {
+        doNothing().when(mockUserService).delete(1L);
 
-        var response = userController.deleteUser(1L);
+        var response = userController.delete(1L);
 
         assertNotNull(response);
         assertEquals(204, response.getStatusCode().value());
-        verify(mockUserService, times(1)).deleteUser(1L);
+        verify(mockUserService, times(1)).delete(1L);
     }
 }

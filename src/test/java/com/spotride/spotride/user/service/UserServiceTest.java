@@ -47,7 +47,7 @@ class UserServiceTest {
     private UserService userService;
 
     @Test
-    void testGetAllUsers() {
+    void testGetAll() {
         var user = User.builder()
                 .id(1L)
                 .username("john")
@@ -64,7 +64,7 @@ class UserServiceTest {
 
         when(mockUserRepository.findAll()).thenReturn(List.of(user));
 
-        var result = userService.getAllUsers();
+        var result = userService.getAll();
 
         assertEquals(1, result.size());
         assertEquals("john", result.getFirst().getUsername());
@@ -72,7 +72,7 @@ class UserServiceTest {
     }
 
     @Test
-    void testGetUserById() {
+    void testGetById() {
         var user = User.builder()
                 .id(1L)
                 .username("john")
@@ -89,7 +89,7 @@ class UserServiceTest {
 
         when(mockUserRepository.findById(1L)).thenReturn(Optional.of(user));
 
-        var result = userService.getUserById(1L);
+        var result = userService.getById(1L);
 
         assertNotNull(result);
         assertEquals("john", result.getUsername());
@@ -97,7 +97,7 @@ class UserServiceTest {
     }
 
     @Test
-    void testCreateUser() {
+    void testCreate() {
         var userCreateRequestDto = UserCreateRequestDto.builder()
                 .username("john")
                 .password("password")
@@ -126,7 +126,7 @@ class UserServiceTest {
         when(mockUserRepository.save(any(User.class))).thenReturn(savedUser);
 
         var user = userMapper.toEntity(userCreateRequestDto);
-        var createdUser = userService.createUser(userCreateRequestDto);
+        var createdUser = userService.create(userCreateRequestDto);
 
         assertNotNull(createdUser);
         assertEquals("john", createdUser.getUsername());
@@ -135,7 +135,7 @@ class UserServiceTest {
     }
 
     @Test
-    void testUpdateUser() {
+    void testUpdate() {
         var userUpdateRequestDto = UserUpdateRequestDto.builder()
                 .id(null)
                 .username("john_updated")
@@ -180,7 +180,7 @@ class UserServiceTest {
         when(mockUserRepository.save(user)).thenReturn(updatedUser);
 
         userMapper.updateEntityFromDto(userUpdateRequestDto, user);
-        var result = userService.updateUser(1L, userUpdateRequestDto);
+        var result = userService.update(1L, userUpdateRequestDto);
 
         assertNotNull(result);
         assertEquals("john_updated", result.getUsername());
@@ -188,10 +188,10 @@ class UserServiceTest {
     }
 
     @Test
-    void testDeleteUser() {
+    void testDelete() {
         doNothing().when(mockUserRepository).deleteById(1L);
 
-        userService.deleteUser(1L);
+        userService.delete(1L);
 
         verify(mockUserRepository, times(1)).deleteById(1L);
     }
