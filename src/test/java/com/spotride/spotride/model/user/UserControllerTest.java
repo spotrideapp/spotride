@@ -1,4 +1,4 @@
-package com.spotride.spotride.user.controller;
+package com.spotride.spotride.model.user;
 
 import com.spotride.spotride.model.user.controller.UserController;
 import com.spotride.spotride.model.user.dto.UserResponseDto;

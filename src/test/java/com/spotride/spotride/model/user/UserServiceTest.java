@@ -1,8 +1,6 @@
-package com.spotride.spotride.user.service;
+package com.spotride.spotride.model.user;
 
-import com.spotride.spotride.model.user.UserMapper;
 import com.spotride.spotride.model.user.service.UserService;
-import com.spotride.spotride.model.user.UserMapperImpl;
 import com.spotride.spotride.model.user.dto.request.UserCreateRequestDto;
 import com.spotride.spotride.model.user.dto.request.UserUpdateRequestDto;
 import com.spotride.spotride.model.user.model.User;
