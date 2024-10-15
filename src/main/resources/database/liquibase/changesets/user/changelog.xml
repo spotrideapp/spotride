@@ -35,6 +35,26 @@
                 <constraints nullable="true"/>
             </column>
         </createTable>
+
+        <createTable tableName="vehicle_records">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="created_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_at" type="TIMESTAMP">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="vehicle_photos"
+                baseColumnNames="vehicle_record_id"
+                referencedTableName="vehicle_records"
+                referencedColumnNames="id"
+                constraintName="fk_vehicle_photos_vehicle_record"/>
     </changeSet>
 
 </databaseChangeLog>
