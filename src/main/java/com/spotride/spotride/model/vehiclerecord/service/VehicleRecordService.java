@@ -1,6 +1,5 @@
 package com.spotride.spotride.model.vehiclerecord.service;
 
-import com.spotride.spotride.model.vehiclephoto.model.VehiclePhoto;
 import com.spotride.spotride.model.vehiclerecord.VehicleRecordMapper;
 import com.spotride.spotride.model.vehiclerecord.dto.VehicleRecordResponseDto;
 import com.spotride.spotride.model.vehiclerecord.dto.request.VehicleRecordCreateRequestDto;
