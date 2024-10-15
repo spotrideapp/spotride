@@ -1,6 +1,7 @@
 package com.spotride.spotride.model.vehiclephoto.dto.request;
 
 import com.spotride.spotride.model.vehiclephoto.model.VehiclePhoto;
+import com.spotride.spotride.model.vehiclerecord.model.VehicleRecord;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,4 +22,6 @@ public class VehiclePhotoUpdateRequestDto {
 
     @NotNull(message = "URL is required")
     private String url;
+
+    private VehicleRecord vehicleRecord;
 }
