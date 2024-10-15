@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -63,7 +64,7 @@ class VehicleRecordControllerTest {
 
         assertNotNull(response);
         assertEquals(200, response.getStatusCode().value());
-        assertEquals("Test description", response.getBody().getDescription());
+        assertEquals("Test description", Objects.requireNonNull(response.getBody()).getDescription());
         verify(mockVehicleRecordService, times(1)).getById(1L);
     }
 
@@ -84,7 +85,7 @@ class VehicleRecordControllerTest {
 
         assertNotNull(response);
         assertEquals(200, response.getStatusCode().value());
-        assertEquals("New record description", response.getBody().getDescription());
+        assertEquals("New record description", Objects.requireNonNull(response.getBody()).getDescription());
         verify(mockVehicleRecordService, times(1)).create(vehicleRecordCreateRequestDto);
     }
 
@@ -105,7 +106,7 @@ class VehicleRecordControllerTest {
 
         assertNotNull(response);
         assertEquals(200, response.getStatusCode().value());
-        assertEquals("Updated description", response.getBody().getDescription());
+        assertEquals("Updated description", Objects.requireNonNull(response.getBody()).getDescription());
         verify(mockVehicleRecordService, times(1)).update(1L, vehicleRecordUpdateRequestDto);
     }
 
