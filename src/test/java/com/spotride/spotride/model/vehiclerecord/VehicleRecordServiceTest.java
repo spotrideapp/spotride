@@ -56,7 +56,7 @@ class VehicleRecordServiceTest {
         var result = vehicleRecordService.getAll();
 
         assertEquals(1, result.size());
-        assertEquals("Test description", result.get(0).getDescription());
+        assertEquals("Test description", result.getFirst().getDescription());
         verify(mockVehicleRecordRepository, times(1)).findAll();
     }
 
