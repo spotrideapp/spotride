@@ -1,0 +1,6 @@
+<FindBugsFilter>
+    <!-- Ignore faults in MapStruct generated classes -->
+    <Match>
+        <Class name="~.*MapperImpl" />
+    </Match>
+</FindBugsFilter>
