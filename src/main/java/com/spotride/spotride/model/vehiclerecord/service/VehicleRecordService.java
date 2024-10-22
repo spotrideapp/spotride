@@ -57,8 +57,8 @@ public class VehicleRecordService {
         var vehicleRecord = vehicleRecordMapper.toEntity(vehicleRecordCreateRequestDto);
 
         if (vehicleRecord.getVehiclePhotos() != null) {
-            for (var photo : vehicleRecord.getVehiclePhotos()) {
-                photo.setVehicleRecord(vehicleRecord);
+            for (var record : vehicleRecord.getVehiclePhotos()) {
+                record.setVehicleRecord(vehicleRecord);
             }
         }
 
@@ -74,9 +74,9 @@ public class VehicleRecordService {
      */
     public VehicleRecordResponseDto update(Long id, VehicleRecordUpdateRequestDto vehicleRecordUpdateRequestDto) {
         return vehicleRecordRepository.findById(id)
-                .map(vehiclePhoto -> {
-                    vehicleRecordMapper.updateEntityFromDto(vehicleRecordUpdateRequestDto, vehiclePhoto);
-                    return vehicleRecordMapper.toDto(vehicleRecordRepository.save(vehiclePhoto));
+                .map(vehicleRecord -> {
+                    vehicleRecordMapper.updateEntityFromDto(vehicleRecordUpdateRequestDto, vehicleRecord);
+                    return vehicleRecordMapper.toDto(vehicleRecordRepository.save(vehicleRecord));
                 })
                 .orElse(null);
     }
