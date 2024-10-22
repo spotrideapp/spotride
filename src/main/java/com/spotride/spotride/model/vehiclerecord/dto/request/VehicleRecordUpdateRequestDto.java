@@ -20,7 +20,7 @@ public class VehicleRecordUpdateRequestDto {
 
     @NotNull(message = "ID is required")
     private Long id;
-    @NotNull(message = "ID is required")
+    @NotNull(message = "Photos is required")
     private List<VehiclePhoto> vehiclePhotos;
     private String description;
 }
