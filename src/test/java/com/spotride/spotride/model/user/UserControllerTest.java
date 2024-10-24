@@ -1,16 +1,15 @@
-package com.spotride.spotride.user.controller;
+package com.spotride.spotride.model.user;
 
-import com.spotride.spotride.user.dto.UserResponseDto;
-import com.spotride.spotride.user.dto.request.UserCreateRequestDto;
-import com.spotride.spotride.user.dto.request.UserUpdateRequestDto;
-import com.spotride.spotride.user.service.UserService;
+import com.spotride.spotride.model.user.controller.UserController;
+import com.spotride.spotride.model.user.dto.UserResponseDto;
+import com.spotride.spotride.model.user.dto.request.UserCreateRequestDto;
+import com.spotride.spotride.model.user.dto.request.UserUpdateRequestDto;
+import com.spotride.spotride.model.user.service.UserService;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 

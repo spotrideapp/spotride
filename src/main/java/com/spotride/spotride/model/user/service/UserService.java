@@ -1,14 +1,13 @@
-package com.spotride.spotride.user.service;
+package com.spotride.spotride.model.user.service;
 
-import com.spotride.spotride.user.UserMapper;
-import com.spotride.spotride.user.dto.request.UserCreateRequestDto;
-import com.spotride.spotride.user.dto.UserResponseDto;
-import com.spotride.spotride.user.dto.request.UserUpdateRequestDto;
-import com.spotride.spotride.user.repository.UserRepository;
+import com.spotride.spotride.model.user.UserMapper;
+import com.spotride.spotride.model.user.dto.request.UserCreateRequestDto;
+import com.spotride.spotride.model.user.dto.UserResponseDto;
+import com.spotride.spotride.model.user.dto.request.UserUpdateRequestDto;
+import com.spotride.spotride.model.user.repository.UserRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
