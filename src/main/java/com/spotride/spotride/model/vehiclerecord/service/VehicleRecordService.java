@@ -57,8 +57,8 @@ public class VehicleRecordService {
         var vehicleRecord = vehicleRecordMapper.toEntity(vehicleRecordCreateRequestDto);
 
         if (vehicleRecord.getVehiclePhotos() != null) {
-            for (var record : vehicleRecord.getVehiclePhotos()) {
-                record.setVehicleRecord(vehicleRecord);
+            for (var vehiclePhoto : vehicleRecord.getVehiclePhotos()) {
+                vehiclePhoto.setVehicleRecord(vehicleRecord);
             }
         }
 
