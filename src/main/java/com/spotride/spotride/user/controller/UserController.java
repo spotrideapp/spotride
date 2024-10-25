@@ -9,7 +9,7 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +27,7 @@ import static java.util.Objects.nonNull;
 /**
  * Controller for {@link User}.
  */
+@Slf4j
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
@@ -37,6 +38,7 @@ public final class UserController {
 
     @GetMapping
     public List<UserResponseDto> getAllUsers() {
+        log.info("Get all users requested.");
         return userService.getAllUsers();
     }
 
@@ -48,6 +50,7 @@ public final class UserController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDto> getUserById(@PathVariable long id) {
+        log.info("Get user by id {} requested.", id);
         var userResponseDto = userService.getUserById(id);
 
         return nonNull(userResponseDto) ? ResponseEntity.ok(userResponseDto) : ResponseEntity.notFound().build();
@@ -61,6 +64,7 @@ public final class UserController {
      */
     @PostMapping
     public ResponseEntity<UserResponseDto> createUser(@RequestBody @Valid UserCreateRequestDto userDto) {
+        log.info("Create user requested.");
         var createdUser = userService.createUser(userDto);
 
         return ResponseEntity.ok(createdUser);
@@ -75,6 +79,7 @@ public final class UserController {
      */
     @PutMapping("/{id}")
     public ResponseEntity<UserResponseDto> updateUser(@PathVariable long id, @RequestBody @Valid UserUpdateRequestDto userDto) {
+        log.info("Update user by id {} requested.", id);
         var updatedUser = userService.updateUser(id, userDto);
 
         return nonNull(updatedUser) ? ResponseEntity.ok(updatedUser) : ResponseEntity.notFound().build();
@@ -88,6 +93,7 @@ public final class UserController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable long id) {
+        log.info("Delete user by id {} requested.", id);
         userService.deleteUser(id);
 
         return ResponseEntity.noContent().build();
