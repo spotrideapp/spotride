@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,7 @@ import static java.util.Objects.nonNull;
 /**
  * Controller for {@link VehicleRecord}.
  */
+@Slf4j
 @RestController
 @RequestMapping("/vehicle_record")
 @RequiredArgsConstructor
@@ -41,6 +43,7 @@ public class VehicleRecordController {
      */
     @GetMapping
     public List<VehicleRecordResponseDto> getAll() {
+        log.info("Get all Vehicle Records requested.");
         return vehicleRecordService.getAll();
     }
 
@@ -52,6 +55,7 @@ public class VehicleRecordController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<VehicleRecordResponseDto> getById(@PathVariable long id) {
+        log.info("Get Vehicle Record by id {} requested.", id);
         var recordResponseDto = vehicleRecordService.getById(id);
 
         return nonNull(recordResponseDto) ? ResponseEntity.ok(recordResponseDto) : ResponseEntity.notFound().build();
@@ -67,6 +71,7 @@ public class VehicleRecordController {
     public ResponseEntity<VehicleRecordResponseDto> create(
             @RequestBody @Valid VehicleRecordCreateRequestDto vehicleRecordCreateRequestDto
     ) {
+        log.info("Create Vehicle Record requested.");
         var createdRecord = vehicleRecordService.create(vehicleRecordCreateRequestDto);
 
         return ResponseEntity.ok(createdRecord);
@@ -84,6 +89,7 @@ public class VehicleRecordController {
             @PathVariable long id,
             @RequestBody @Valid VehicleRecordUpdateRequestDto vehicleRecordUpdateRequestDto
     ) {
+        log.info("Update Vehicle Record by id {} requested.", id);
         var vehicleRecordResponseDto = vehicleRecordService.update(id, vehicleRecordUpdateRequestDto);
 
         return nonNull(vehicleRecordResponseDto) ? ResponseEntity.ok(vehicleRecordResponseDto) : ResponseEntity.notFound().build();
@@ -97,6 +103,7 @@ public class VehicleRecordController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable long id) {
+        log.info("Delete Vehicle Record by id {} requested.", id);
         vehicleRecordService.delete(id);
 
         return ResponseEntity.noContent().build();
