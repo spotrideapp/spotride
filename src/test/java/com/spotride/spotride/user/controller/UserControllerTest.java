@@ -38,7 +38,7 @@ class UserControllerTest {
     private UserController userController;
 
     @Test
-    void testGetAll() {
+    void testGetAllUsers() {
         var userDto = UserResponseDto.builder()
                 .id(1L)
                 .username("john")
@@ -60,7 +60,7 @@ class UserControllerTest {
     }
 
     @Test
-    void testGetById() {
+    void testGetUserById() {
         var userDto = UserResponseDto.builder()
                 .id(1L)
                 .username("john")
@@ -83,7 +83,7 @@ class UserControllerTest {
     }
 
     @Test
-    void testCreate() {
+    void testCreateUser() {
         var userCreateRequestDto = UserCreateRequestDto.builder()
                 .username("john")
                 .password("password")
@@ -118,7 +118,7 @@ class UserControllerTest {
     }
 
     @Test
-    void testUpdate() {
+    void testUpdateUser() {
         var userUpdateRequestDto = UserUpdateRequestDto.builder()
                 .id(null)
                 .username("john_updated")
@@ -153,7 +153,7 @@ class UserControllerTest {
     }
 
     @Test
-    void testDelete() {
+    void testDeleteUser() {
         doNothing().when(mockUserService).delete(1L);
 
         var response = userController.delete(1L);

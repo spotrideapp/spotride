@@ -47,7 +47,7 @@ class UserServiceTest {
     private UserService userService;
 
     @Test
-    void testGetAll() {
+    void testGetAllUsers() {
         var user = User.builder()
                 .id(1L)
                 .username("john")
@@ -72,7 +72,7 @@ class UserServiceTest {
     }
 
     @Test
-    void testGetById() {
+    void testGetUserById() {
         var user = User.builder()
                 .id(1L)
                 .username("john")
@@ -97,7 +97,7 @@ class UserServiceTest {
     }
 
     @Test
-    void testCreate() {
+    void testCreateUser() {
         var userCreateRequestDto = UserCreateRequestDto.builder()
                 .username("john")
                 .password("password")
@@ -135,7 +135,7 @@ class UserServiceTest {
     }
 
     @Test
-    void testUpdate() {
+    void testUpdateUser() {
         var userUpdateRequestDto = UserUpdateRequestDto.builder()
                 .id(null)
                 .username("john_updated")
@@ -188,7 +188,7 @@ class UserServiceTest {
     }
 
     @Test
-    void testDelete() {
+    void testDeleteUser() {
         doNothing().when(mockUserRepository).deleteById(1L);
 
         userService.delete(1L);
