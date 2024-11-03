@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.29.xsd">
+
+    <changeSet id="1" author="andrey-shipulya">
+        <createTable tableName="vehicles">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="brand" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="model" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="generation" type="VARCHAR(255)"/>
+            <column name="product_year" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="body_type" type="VARCHAR(255)"/>
+            <column name="engine_type" type="VARCHAR(255)"/>
+            <column name="engine_power" type="INT"/>
+            <column name="engine_displacement" type="INT"/>
+            <column name="vehicle_photo_url" type="VARCHAR(255)"/>
+            <column name="modified_at" type="TIMESTAMP">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createIndex indexName="idx_vehicles_brand" tableName="vehicles">
+            <column name="brand"/>
+        </createIndex>
+
+        <createIndex indexName="idx_vehicles_model" tableName="vehicles">
+            <column name="model"/>
+        </createIndex>
+
+        <addForeignKeyConstraint
+                baseTableName="vehicle_records"
+                baseColumnNames="vehicle_id"
+                referencedTableName="vehicles"
+                referencedColumnNames="id"
+                constraintName="fk_vehicle_records_vehicle"/>
+
+        <addForeignKeyConstraint
+                baseTableName="vehicles"
+                baseColumnNames="user_id"
+                referencedTableName="users"
+                referencedColumnNames="id"
+                constraintName="fk_vehicles_user"/>
+    </changeSet>
+
+</databaseChangeLog>
