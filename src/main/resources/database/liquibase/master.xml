@@ -8,5 +8,6 @@
     <include file="changesets/user/changelog.xml" relativeToChangelogFile="true"/>
     <include file="changesets/vehiclerecord/changelog.xml" relativeToChangelogFile="true"/>
     <include file="changesets/vehiclephoto/changelog.xml" relativeToChangelogFile="true"/>
+    <include file="changesets/vehicle/changelog.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

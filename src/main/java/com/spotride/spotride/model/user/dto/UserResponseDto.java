@@ -1,9 +1,12 @@
 package com.spotride.spotride.model.user.dto;
 
+import com.spotride.spotride.model.vehicle.model.Vehicle;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 import java.time.LocalDate;
 
@@ -31,4 +34,6 @@ public class UserResponseDto {
     private LocalDate birthDate;
 
     private String city;
+
+    private List<Vehicle> vehicles;
 }
