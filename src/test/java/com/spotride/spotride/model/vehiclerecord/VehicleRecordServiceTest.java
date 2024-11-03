@@ -43,7 +43,7 @@ class VehicleRecordServiceTest {
     private VehicleRecordService vehicleRecordService;
 
     @Test
-    void testGetAll() {
+    void testGetAllVehicleRecords() {
         var vehicleRecord = VehicleRecord.builder()
                 .id(1L)
                 .description("Test description")
@@ -61,7 +61,7 @@ class VehicleRecordServiceTest {
     }
 
     @Test
-    void testGetById() {
+    void testGetVehicleRecordById() {
         var vehicleRecord = VehicleRecord.builder()
                 .id(1L)
                 .description("Test description")
@@ -79,7 +79,7 @@ class VehicleRecordServiceTest {
     }
 
     @Test
-    void testCreate() {
+    void testCreateVehicleRecord() {
         var vehicleRecordCreateRequestDto = VehicleRecordCreateRequestDto.builder()
                 .description("New description")
                 .build();
@@ -104,7 +104,7 @@ class VehicleRecordServiceTest {
     }
 
     @Test
-    void testUpdate() {
+    void testUpdateVehicleRecord() {
         var vehicleRecord = VehicleRecord.builder()
                 .id(1L)
                 .description("Old description")
@@ -136,7 +136,7 @@ class VehicleRecordServiceTest {
     }
 
     @Test
-    void testDelete() {
+    void testDeleteVehicleRecord() {
         doNothing().when(mockVehicleRecordRepository).deleteById(1L);
 
         vehicleRecordService.delete(1L);
