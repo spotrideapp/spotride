@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,7 @@ import static java.util.Objects.nonNull;
 /**
  * Controller for {@link VehiclePhotoController}.
  */
+@Slf4j
 @RestController
 @RequestMapping("/vehicle_photo")
 @RequiredArgsConstructor
@@ -40,6 +42,7 @@ public final class VehiclePhotoController {
      */
     @GetMapping
     public List<VehiclePhotoResponseDto> getAll() {
+        log.info("Get all Vehicle Photo requested.");
         return vehiclePhotoService.getAll();
     }
 
@@ -51,6 +54,7 @@ public final class VehiclePhotoController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<VehiclePhotoResponseDto> getById(@PathVariable long id) {
+        log.info("Get Vehicle Photo by id {} requested.", id);
         var userResponseDto = vehiclePhotoService.getById(id);
 
         return nonNull(userResponseDto) ? ResponseEntity.ok(userResponseDto) : ResponseEntity.notFound().build();
@@ -64,6 +68,7 @@ public final class VehiclePhotoController {
      */
     @PostMapping
     public ResponseEntity<VehiclePhotoResponseDto> create(@RequestBody @Valid VehiclePhotoCreateRequestDto vehiclePhotoCreateRequestDto) {
+        log.info("Create Vehicle Photo requested.");
         var createdPhoto = vehiclePhotoService.create(vehiclePhotoCreateRequestDto);
 
         return ResponseEntity.ok(createdPhoto);
@@ -81,6 +86,7 @@ public final class VehiclePhotoController {
             @PathVariable long id,
             @RequestBody @Valid VehiclePhotoUpdateRequestDto vehiclePhotoUpdateRequestDto
     ) {
+        log.info("Update Vehicle Photo by id {} requested.", id);
         var vehiclePhotoResponseDto = vehiclePhotoService.update(id, vehiclePhotoUpdateRequestDto);
 
         return nonNull(vehiclePhotoResponseDto) ? ResponseEntity.ok(vehiclePhotoResponseDto) : ResponseEntity.notFound().build();
@@ -94,6 +100,7 @@ public final class VehiclePhotoController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable long id) {
+        log.info("Delete Vehicle Photo by id {} requested.", id);
         vehiclePhotoService.delete(id);
 
         return ResponseEntity.noContent().build();
