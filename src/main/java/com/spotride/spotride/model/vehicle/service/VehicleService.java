@@ -1,7 +1,6 @@
 package com.spotride.spotride.model.vehicle.service;
 
 import com.spotride.spotride.model.user.UserMapper;
-import com.spotride.spotride.model.user.dto.UserResponseDto;
 import com.spotride.spotride.model.user.service.UserService;
 import com.spotride.spotride.model.vehicle.VehicleMapper;
 import com.spotride.spotride.model.vehicle.dto.VehicleResponseDto;
