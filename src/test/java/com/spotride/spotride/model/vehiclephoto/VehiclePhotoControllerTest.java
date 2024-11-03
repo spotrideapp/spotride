@@ -34,7 +34,7 @@ class VehiclePhotoControllerTest {
     private VehiclePhotoController vehiclePhotoController;
 
     @Test
-    void testGetAll() {
+    void testGetAllVehiclePhotos() {
         var vehiclePhotoDto = VehiclePhotoResponseDto.builder()
                 .id(1L)
                 .url("http://test.url")
@@ -50,7 +50,7 @@ class VehiclePhotoControllerTest {
     }
 
     @Test
-    void testGetById() {
+    void testGetVehiclePhotoById() {
         var vehiclePhotoDto = VehiclePhotoResponseDto.builder()
                 .id(1L)
                 .url("http://test.url")
@@ -67,7 +67,7 @@ class VehiclePhotoControllerTest {
     }
 
     @Test
-    void testUpdate() {
+    void testUpdateVehiclePhoto() {
         var vehiclePhotoUpdateRequestDto = VehiclePhotoUpdateRequestDto.builder()
                 .id(null)
                 .url("http://test.url")
@@ -89,7 +89,7 @@ class VehiclePhotoControllerTest {
     }
 
     @Test
-    void testDeleteUser() {
+    void testDeleteVehiclePhoto() {
         doNothing().when(mockVehiclePhotoService).delete(1L);
 
         var response = vehiclePhotoController.delete(1L);

@@ -42,7 +42,7 @@ class VehiclePhotoServiceTest {
     private VehiclePhotoService vehiclePhotoService;
 
     @Test
-    void testGetAll() {
+    void testGetAllVehiclePhotos() {
         var vehiclePhoto = VehiclePhoto.builder()
                 .id(1L)
                 .url("http://test.url")
@@ -60,7 +60,7 @@ class VehiclePhotoServiceTest {
     }
 
     @Test
-    void testGetById() {
+    void testGetVehiclePhotoById() {
         var vehiclePhoto = VehiclePhoto.builder()
                 .id(1L)
                 .url("http://test.url")
@@ -78,7 +78,7 @@ class VehiclePhotoServiceTest {
     }
 
     @Test
-    void testCreate() {
+    void testCreateVehiclePhoto() {
         var vehiclePhotoCreateRequestDto = VehiclePhotoCreateRequestDto.builder()
                 .url("http://test.url")
                 .build();
@@ -101,7 +101,7 @@ class VehiclePhotoServiceTest {
     }
 
     @Test
-    void testUpdate() {
+    void testUpdateVehiclePhoto() {
         var vehiclePhotoUpdateRequestDto = VehiclePhotoUpdateRequestDto.builder()
                 .id(null)
                 .url("http://test.url")
@@ -129,7 +129,7 @@ class VehiclePhotoServiceTest {
     }
 
     @Test
-    void testDelete() {
+    void testDeleteVehiclePhoto() {
         doNothing().when(mockVehiclePhotoRepository).deleteById(1L);
 
         vehiclePhotoService.delete(1L);
