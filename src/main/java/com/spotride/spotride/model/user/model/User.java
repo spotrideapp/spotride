@@ -1,10 +1,16 @@
 package com.spotride.spotride.model.user.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.spotride.spotride.model.vehicle.model.Vehicle;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +22,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * User data.
@@ -54,4 +61,9 @@ public class User {
 
     @LastModifiedDate
     private LocalDateTime modifiedAt;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "vehicle_id")
+    @JsonManagedReference
+    private List<Vehicle> vehicles;
 }
