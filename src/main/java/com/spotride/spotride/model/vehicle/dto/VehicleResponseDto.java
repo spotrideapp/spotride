@@ -40,5 +40,5 @@ public class VehicleResponseDto {
 
     private String vehiclePhotoUrl;
 
-    private List<VehicleRecord> vehicleRecords;
+//    private List<VehicleRecord> vehicleRecords;
 }
