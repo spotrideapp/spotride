@@ -60,9 +60,9 @@ public class VehicleService {
     public VehicleResponseDto create(VehicleCreateRequestDto vehicleCreateRequestDto) {
         var vehicle = vehicleMapper.toEntity(vehicleCreateRequestDto);
         var userId = vehicleCreateRequestDto.getUserId();
-        var userById = userService.getUserById(userId);
+        var userById = userService.getUserEntityById(userId);
 
-        vehicle.setUser(userMapper.toEntity(userById));
+        vehicle.setUser(userById.get());
 
         return vehicleMapper.toDto(vehicleRepository.save(vehicle));
     }

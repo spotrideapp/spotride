@@ -44,7 +44,6 @@ public class Vehicle {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @JsonBackReference
     private User user;
 
     private String brand;
@@ -65,10 +64,10 @@ public class Vehicle {
 
     private String vehiclePhotoUrl;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn(name = "vehicle_id")
-    @JsonManagedReference
-    private List<VehicleRecord> vehicleRecords;
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+//    @JoinColumn(name = "vehicle_id")
+//    @JsonManagedReference
+//    private List<VehicleRecord> vehicleRecords;
 
     @CreatedDate
     private LocalDateTime createdAt;

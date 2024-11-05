@@ -4,6 +4,7 @@ import com.spotride.spotride.model.user.UserMapper;
 import com.spotride.spotride.model.user.dto.request.UserCreateRequestDto;
 import com.spotride.spotride.model.user.dto.UserResponseDto;
 import com.spotride.spotride.model.user.dto.request.UserUpdateRequestDto;
+import com.spotride.spotride.model.user.model.User;
 import com.spotride.spotride.model.user.repository.UserRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * User service.
@@ -46,6 +48,10 @@ public final class UserService {
         return userRepository.findById(id)
                 .map(userMapper::toDto)
                 .orElse(null);
+    }
+
+    public Optional<User> getUserEntityById(Long id) {
+        return userRepository.findById(id);
     }
 
     /**
