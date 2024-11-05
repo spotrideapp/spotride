@@ -70,6 +70,7 @@ tasks.spotbugsMain {
 	reports.create("html") {
 		required.set(true)
 		outputLocation.set(file("${project.projectDir}/build/reports/spotbugs.html"))
+		excludeFilter.set(file("${project.projectDir}/config/spotbugs/spotbugs-exclude.xml"))
 		setStylesheet("fancy-hist.xsl")
 	}
 }
