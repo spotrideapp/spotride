@@ -1,7 +1,5 @@
 package com.spotride.spotride.model.vehicle;
 
-import com.spotride.spotride.model.user.UserMapper;
-import com.spotride.spotride.model.user.dto.UserResponseDto;
 import com.spotride.spotride.model.user.model.User;
 import com.spotride.spotride.model.user.service.UserService;
 import com.spotride.spotride.model.vehicle.dto.request.VehicleCreateRequestDto;
@@ -18,6 +16,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -42,9 +41,6 @@ class VehicleServiceTest {
     @MockBean
     private UserService mockUserService;
 
-    @MockBean
-    private UserMapper mockUserMapper;
-
     @Autowired
     private VehicleMapper vehicleMapper;
 
@@ -62,16 +58,6 @@ class VehicleServiceTest {
                 .lastName("Doe")
                 .createdAt(DATE_TIME_NOW)
                 .modifiedAt(null)
-                .build();
-
-        var userResponseDto = UserResponseDto.builder()
-                .id(1L)
-                .username("john")
-                .password("password")
-                .email("john@example.com")
-                .firstName("John")
-                .lastName("Doe")
-                .vehicles(Collections.emptyList())
                 .build();
 
         var vehicleCreateRequestDto = VehicleCreateRequestDto.builder()
@@ -105,14 +91,12 @@ class VehicleServiceTest {
                 .modifiedAt(null)
                 .build();
 
-        when(mockUserService.getUserById(1L)).thenReturn(userResponseDto);
-        when(mockUserMapper.toDto(any(User.class))).thenReturn(userResponseDto);
-        when(mockUserMapper.toEntity(any(UserResponseDto.class))).thenReturn(user);
+        when(mockUserService.getUserEntityById(1L)).thenReturn(Optional.of(user));
         when(mockVehicleRepository.save(any(Vehicle.class))).thenReturn(savedVehicle);
 
         var vehicle = vehicleMapper.toEntity(vehicleCreateRequestDto);
         var createdVehicle = vehicleService.create(vehicleCreateRequestDto);
-        vehicle.setUser(mockUserMapper.toEntity(mockUserService.getUserById(createdVehicle.getUserId())));
+        vehicle.setUser(user);
 
         assertNotNull(createdVehicle);
         assertEquals("Opel", createdVehicle.getBrand());
