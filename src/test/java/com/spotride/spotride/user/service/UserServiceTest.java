@@ -14,6 +14,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -54,13 +55,16 @@ class UserServiceTest {
                 .email("john@example.com")
                 .firstName("John")
                 .lastName("Doe")
+                .phoneNumber("123456789")
+                .birthDate(LocalDate.now())
+                .city("CityName")
                 .createdAt(DATE_TIME_NOW)
                 .modifiedAt(null)
                 .build();
 
         when(mockUserRepository.findAll()).thenReturn(List.of(user));
 
-        var result = userService.getAllUsers();
+        var result = userService.getAll();
 
         assertEquals(1, result.size());
         assertEquals("john", result.getFirst().getUsername());
@@ -76,13 +80,16 @@ class UserServiceTest {
                 .email("john@example.com")
                 .firstName("John")
                 .lastName("Doe")
+                .phoneNumber("123456789")
+                .birthDate(LocalDate.now())
+                .city("CityName")
                 .createdAt(DATE_TIME_NOW)
                 .modifiedAt(null)
                 .build();
 
         when(mockUserRepository.findById(1L)).thenReturn(Optional.of(user));
 
-        var result = userService.getUserById(1L);
+        var result = userService.getById(1L);
 
         assertNotNull(result);
         assertEquals("john", result.getUsername());
@@ -97,6 +104,9 @@ class UserServiceTest {
                 .email("john@example.com")
                 .firstName("John")
                 .lastName("Doe")
+                .phoneNumber("123456789")
+                .birthDate(LocalDate.now())
+                .city("CityName")
                 .build();
 
         var savedUser = User.builder()
@@ -106,6 +116,9 @@ class UserServiceTest {
                 .email("john@example.com")
                 .firstName("John")
                 .lastName("Doe")
+                .phoneNumber("123456789")
+                .birthDate(LocalDate.now())
+                .city("CityName")
                 .createdAt(DATE_TIME_NOW)
                 .modifiedAt(DATE_TIME_NOW)
                 .build();
@@ -113,7 +126,7 @@ class UserServiceTest {
         when(mockUserRepository.save(any(User.class))).thenReturn(savedUser);
 
         var user = userMapper.toEntity(userCreateRequestDto);
-        var createdUser = userService.createUser(userCreateRequestDto);
+        var createdUser = userService.create(userCreateRequestDto);
 
         assertNotNull(createdUser);
         assertEquals("john", createdUser.getUsername());
@@ -130,6 +143,9 @@ class UserServiceTest {
                 .email("john_updated@example.com")
                 .firstName("John")
                 .lastName("Doe")
+                .phoneNumber("123456789")
+                .birthDate(LocalDate.now())
+                .city("CityName")
                 .build();
 
         var user = User.builder()
@@ -139,6 +155,9 @@ class UserServiceTest {
                 .email("john@example.com")
                 .firstName("John")
                 .lastName("Doe")
+                .phoneNumber("123456789")
+                .birthDate(LocalDate.now())
+                .city("CityName")
                 .createdAt(DATE_TIME_NOW)
                 .modifiedAt(null)
                 .build();
@@ -150,6 +169,9 @@ class UserServiceTest {
                 .email("john_updated@example.com")
                 .firstName("John")
                 .lastName("Doe")
+                .phoneNumber("123456789")
+                .birthDate(LocalDate.now())
+                .city("CityName")
                 .createdAt(DATE_TIME_NOW)
                 .modifiedAt(DATE_TIME_NOW)
                 .build();
@@ -158,7 +180,7 @@ class UserServiceTest {
         when(mockUserRepository.save(user)).thenReturn(updatedUser);
 
         userMapper.updateEntityFromDto(userUpdateRequestDto, user);
-        var result = userService.updateUser(1L, userUpdateRequestDto);
+        var result = userService.update(1L, userUpdateRequestDto);
 
         assertNotNull(result);
         assertEquals("john_updated", result.getUsername());
@@ -169,7 +191,7 @@ class UserServiceTest {
     void testDeleteUser() {
         doNothing().when(mockUserRepository).deleteById(1L);
 
-        userService.deleteUser(1L);
+        userService.delete(1L);
 
         verify(mockUserRepository, times(1)).deleteById(1L);
     }

@@ -30,7 +30,7 @@ public final class UserService {
      *
      * @return list of {@link UserResponseDto}
      */
-    public List<UserResponseDto> getAllUsers() {
+    public List<UserResponseDto> getAll() {
         return userRepository.findAll().stream()
                 .map(userMapper::toDto)
                 .toList();
@@ -42,7 +42,7 @@ public final class UserService {
      * @param id user id
      * @return {@link UserResponseDto} by user id
      */
-    public UserResponseDto getUserById(Long id) {
+    public UserResponseDto getById(Long id) {
         return userRepository.findById(id)
                 .map(userMapper::toDto)
                 .orElse(null);
@@ -54,7 +54,7 @@ public final class UserService {
      * @param userRequestDto {@link UserCreateRequestDto} for user
      * @return {@link UserResponseDto} for created user
      */
-    public UserResponseDto createUser(UserCreateRequestDto userRequestDto) {
+    public UserResponseDto create(UserCreateRequestDto userRequestDto) {
         var user = userMapper.toEntity(userRequestDto);
 
         return userMapper.toDto(userRepository.save(user));
@@ -66,7 +66,7 @@ public final class UserService {
      * @param id user id
      * @param updatedUserDto user to be updated
      */
-    public UserResponseDto updateUser(Long id, UserUpdateRequestDto updatedUserDto) {
+    public UserResponseDto update(Long id, UserUpdateRequestDto updatedUserDto) {
         return userRepository.findById(id)
                 .map(user -> {
                     userMapper.updateEntityFromDto(updatedUserDto, user);
@@ -75,7 +75,7 @@ public final class UserService {
                 .orElse(null);
     }
 
-    public void deleteUser(Long id) {
+    public void delete(Long id) {
         userRepository.deleteById(id);
     }
 }

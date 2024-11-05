@@ -8,12 +8,11 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -46,15 +45,18 @@ class UserControllerTest {
                 .email("john@example.com")
                 .firstName("John")
                 .lastName("Doe")
+                .phoneNumber("123456789")
+                .birthDate(LocalDate.now())
+                .city("CityName")
                 .build();
 
-        when(mockUserService.getAllUsers()).thenReturn(List.of(userDto));
+        when(mockUserService.getAll()).thenReturn(List.of(userDto));
 
-        var result = userController.getAllUsers();
+        var result = userController.getAll();
 
         assertNotNull(result);
         assertEquals(1, result.size());
-        verify(mockUserService, times(1)).getAllUsers();
+        verify(mockUserService, times(1)).getAll();
     }
 
     @Test
@@ -65,16 +67,19 @@ class UserControllerTest {
                 .email("john@example.com")
                 .firstName("John")
                 .lastName("Doe")
+                .phoneNumber("123456789")
+                .birthDate(LocalDate.now())
+                .city("CityName")
                 .build();
 
-        when(mockUserService.getUserById(1L)).thenReturn(userDto);
+        when(mockUserService.getById(1L)).thenReturn(userDto);
 
-        var response = userController.getUserById(1L);
+        var response = userController.getById(1L);
 
         assertNotNull(response);
         assertEquals(200, response.getStatusCode().value());
         assertEquals("john", Objects.requireNonNull(response.getBody()).getUsername());
-        verify(mockUserService, times(1)).getUserById(1L);
+        verify(mockUserService, times(1)).getById(1L);
     }
 
     @Test
@@ -85,6 +90,9 @@ class UserControllerTest {
                 .email("john@example.com")
                 .firstName("John")
                 .lastName("Doe")
+                .phoneNumber("123456789")
+                .birthDate(LocalDate.now())
+                .city("CityName")
                 .build();
 
         var createdUserDto = UserResponseDto.builder()
@@ -93,17 +101,20 @@ class UserControllerTest {
                 .email("john@example.com")
                 .firstName("John")
                 .lastName("Doe")
+                .phoneNumber("123456789")
+                .birthDate(LocalDate.now())
+                .city("CityName")
                 .build();
 
 
-        when(mockUserService.createUser(userCreateRequestDto)).thenReturn(createdUserDto);
+        when(mockUserService.create(userCreateRequestDto)).thenReturn(createdUserDto);
 
-        var response = userController.createUser(userCreateRequestDto);
+        var response = userController.create(userCreateRequestDto);
 
         assertNotNull(response);
         assertEquals(200, response.getStatusCode().value());
         assertEquals("john", Objects.requireNonNull(response.getBody()).getUsername());
-        verify(mockUserService, times(1)).createUser(userCreateRequestDto);
+        verify(mockUserService, times(1)).create(userCreateRequestDto);
     }
 
     @Test
@@ -115,6 +126,9 @@ class UserControllerTest {
                 .email("john_updated@example.com")
                 .firstName("John")
                 .lastName("Doe")
+                .phoneNumber("123456789")
+                .birthDate(LocalDate.now())
+                .city("CityName")
                 .build();
 
         var updatedUserDto = UserResponseDto.builder()
@@ -123,26 +137,29 @@ class UserControllerTest {
                 .email("john_updated@example.com")
                 .firstName("John")
                 .lastName("Doe")
+                .phoneNumber("123456789")
+                .birthDate(LocalDate.now())
+                .city("CityName")
                 .build();
 
-        when(mockUserService.updateUser(1L, userUpdateRequestDto)).thenReturn(updatedUserDto);
+        when(mockUserService.update(1L, userUpdateRequestDto)).thenReturn(updatedUserDto);
 
-        var response = userController.updateUser(1L, userUpdateRequestDto);
+        var response = userController.update(1L, userUpdateRequestDto);
 
         assertNotNull(response);
         assertEquals(200, response.getStatusCode().value());
         assertEquals("john_updated", Objects.requireNonNull(response.getBody()).getUsername());
-        verify(mockUserService, times(1)).updateUser(1L, userUpdateRequestDto);
+        verify(mockUserService, times(1)).update(1L, userUpdateRequestDto);
     }
 
     @Test
     void testDeleteUser() {
-        doNothing().when(mockUserService).deleteUser(1L);
+        doNothing().when(mockUserService).delete(1L);
 
-        var response = userController.deleteUser(1L);
+        var response = userController.delete(1L);
 
         assertNotNull(response);
         assertEquals(204, response.getStatusCode().value());
-        verify(mockUserService, times(1)).deleteUser(1L);
+        verify(mockUserService, times(1)).delete(1L);
     }
 }
