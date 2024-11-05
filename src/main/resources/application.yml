@@ -2,6 +2,8 @@ server:
   port: 8080
   shutdown: graceful
 spring:
+  application:
+    name: spotride
   banner:
     location: banner.txt
   jpa:
@@ -47,3 +49,6 @@ management:
 springdoc:
   api-docs:
     path: /api-doc
+
+logging:
+  config: classpath:log4j2.xml
