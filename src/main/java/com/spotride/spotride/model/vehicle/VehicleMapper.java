@@ -17,7 +17,7 @@ public interface VehicleMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "modifiedAt", ignore = true)
-    @Mapping(source = "userId", target = "user.id")
+    @Mapping(target = "user", ignore = true)
     Vehicle toEntity(VehicleCreateRequestDto vehicleCreateRequestDto);
 
     @Mapping(source = "user.id", target = "userId")
