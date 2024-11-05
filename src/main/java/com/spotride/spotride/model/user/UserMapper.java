@@ -1,7 +1,7 @@
 package com.spotride.spotride.model.user;
 
-import com.spotride.spotride.model.user.dto.request.UserCreateRequestDto;
 import com.spotride.spotride.model.user.dto.UserResponseDto;
+import com.spotride.spotride.model.user.dto.request.UserCreateRequestDto;
 import com.spotride.spotride.model.user.dto.request.UserUpdateRequestDto;
 import com.spotride.spotride.model.user.model.User;
 import org.mapstruct.Mapper;
@@ -18,11 +18,6 @@ public interface UserMapper {
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "modifiedAt", ignore = true)
     User toEntity(UserCreateRequestDto userCreateRequestDto);
-
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "modifiedAt", ignore = true)
-    User toEntity(UserResponseDto userResponseDto);
 
     UserResponseDto toDto(User user);
 

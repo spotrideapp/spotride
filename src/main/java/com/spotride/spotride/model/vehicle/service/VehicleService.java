@@ -1,6 +1,5 @@
 package com.spotride.spotride.model.vehicle.service;
 
-import com.spotride.spotride.model.user.UserMapper;
 import com.spotride.spotride.model.user.service.UserService;
 import com.spotride.spotride.model.vehicle.VehicleMapper;
 import com.spotride.spotride.model.vehicle.dto.VehicleResponseDto;
@@ -26,7 +25,6 @@ public class VehicleService {
     VehicleRepository vehicleRepository;
     VehicleMapper vehicleMapper;
     UserService userService;
-    UserMapper userMapper;
 
     /**
      * Returns all entities.
