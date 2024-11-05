@@ -22,7 +22,7 @@ public interface UserMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "modifiedAt", ignore = true)
-    User toEntity(UserResponseDto userCreateRequestDto);
+    User toEntity(UserResponseDto userResponseDto);
 
     UserResponseDto toDto(User user);
 

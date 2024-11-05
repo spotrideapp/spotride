@@ -66,7 +66,7 @@ public class Vehicle {
     private String vehiclePhotoUrl;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn(name = "vehicle")
+    @JoinColumn(name = "vehicle_id")
     @JsonManagedReference
     private List<VehicleRecord> vehicleRecords;
 
