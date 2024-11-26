@@ -1,10 +1,10 @@
-package com.spotride.spotride.user.controller;
+package com.spotride.spotride.model.user.controller;
 
-import com.spotride.spotride.user.dto.request.UserCreateRequestDto;
-import com.spotride.spotride.user.dto.UserResponseDto;
-import com.spotride.spotride.user.dto.request.UserUpdateRequestDto;
-import com.spotride.spotride.user.model.User;
-import com.spotride.spotride.user.service.UserService;
+import com.spotride.spotride.model.user.dto.request.UserCreateRequestDto;
+import com.spotride.spotride.model.user.dto.UserResponseDto;
+import com.spotride.spotride.model.user.dto.request.UserUpdateRequestDto;
+import com.spotride.spotride.model.user.model.User;
+import com.spotride.spotride.model.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
