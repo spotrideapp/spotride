@@ -1,9 +1,9 @@
 package com.spotride.spotride.model.vehiclephoto.controller;
 
+import com.spotride.spotride.model.vehiclephoto.VehiclePhotoFacade;
 import com.spotride.spotride.model.vehiclephoto.dto.VehiclePhotoResponseDto;
 import com.spotride.spotride.model.vehiclephoto.dto.request.VehiclePhotoCreateRequestDto;
 import com.spotride.spotride.model.vehiclephoto.dto.request.VehiclePhotoUpdateRequestDto;
-import com.spotride.spotride.model.vehiclephoto.service.VehiclePhotoService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +33,7 @@ import static java.util.Objects.nonNull;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public final class VehiclePhotoController {
 
-    VehiclePhotoService vehiclePhotoService;
+    VehiclePhotoFacade vehiclePhotoFacade;
 
     /**
      * Get all {@link VehiclePhotoResponseDto}.
@@ -43,7 +43,7 @@ public final class VehiclePhotoController {
     @GetMapping
     public List<VehiclePhotoResponseDto> getAll() {
         log.info("Get all Vehicle Photo requested.");
-        return vehiclePhotoService.getAll();
+        return vehiclePhotoFacade.getAll();
     }
 
     /**
@@ -55,7 +55,7 @@ public final class VehiclePhotoController {
     @GetMapping("/{id}")
     public ResponseEntity<VehiclePhotoResponseDto> getById(@PathVariable long id) {
         log.info("Get Vehicle Photo by id {} requested.", id);
-        var userResponseDto = vehiclePhotoService.getById(id);
+        var userResponseDto = vehiclePhotoFacade.getById(id);
 
         return nonNull(userResponseDto) ? ResponseEntity.ok(userResponseDto) : ResponseEntity.notFound().build();
     }
@@ -69,7 +69,7 @@ public final class VehiclePhotoController {
     @PostMapping
     public ResponseEntity<VehiclePhotoResponseDto> create(@RequestBody @Valid VehiclePhotoCreateRequestDto vehiclePhotoCreateRequestDto) {
         log.info("Create Vehicle Photo requested.");
-        var createdPhoto = vehiclePhotoService.create(vehiclePhotoCreateRequestDto);
+        var createdPhoto = vehiclePhotoFacade.create(vehiclePhotoCreateRequestDto);
 
         return ResponseEntity.ok(createdPhoto);
     }
@@ -87,7 +87,7 @@ public final class VehiclePhotoController {
             @RequestBody @Valid VehiclePhotoUpdateRequestDto vehiclePhotoUpdateRequestDto
     ) {
         log.info("Update Vehicle Photo by id {} requested.", id);
-        var vehiclePhotoResponseDto = vehiclePhotoService.update(id, vehiclePhotoUpdateRequestDto);
+        var vehiclePhotoResponseDto = vehiclePhotoFacade.update(id, vehiclePhotoUpdateRequestDto);
 
         return nonNull(vehiclePhotoResponseDto) ? ResponseEntity.ok(vehiclePhotoResponseDto) : ResponseEntity.notFound().build();
     }
@@ -101,7 +101,7 @@ public final class VehiclePhotoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable long id) {
         log.info("Delete Vehicle Photo by id {} requested.", id);
-        vehiclePhotoService.delete(id);
+        vehiclePhotoFacade.delete(id);
 
         return ResponseEntity.noContent().build();
     }
