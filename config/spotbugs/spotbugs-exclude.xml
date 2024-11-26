@@ -3,4 +3,9 @@
     <Match>
         <Class name="~.*MapperImpl" />
     </Match>
+    <!-- Ignore SECHCP warnings in test classes -->
+    <Match>
+        <Bug code="SECHCP" />
+        <Class name="~.*Test" />
+    </Match>
 </FindBugsFilter>

@@ -5,7 +5,6 @@ import com.spotride.spotride.model.vehiclephoto.dto.request.VehiclePhotoUpdateRe
 import com.spotride.spotride.model.vehiclephoto.model.VehiclePhoto;
 import com.spotride.spotride.model.vehiclephoto.repository.VehiclePhotoRepository;
 import com.spotride.spotride.model.vehiclephoto.service.VehiclePhotoService;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,6 @@ import static org.mockito.Mockito.when;
 
 @ContextConfiguration(classes = {VehiclePhotoMapperImpl.class, VehiclePhotoService.class})
 @ExtendWith(SpringExtension.class)
-@SuppressFBWarnings(value = "SECHCP", justification = "Hardcoded password.")
 class VehiclePhotoServiceTest {
 
     private static final LocalDateTime DATE_TIME_NOW = LocalDateTime.now();

@@ -1,11 +1,10 @@
 package com.spotride.spotride.model.user;
 
-import com.spotride.spotride.model.user.service.UserService;
 import com.spotride.spotride.model.user.dto.request.UserCreateRequestDto;
 import com.spotride.spotride.model.user.dto.request.UserUpdateRequestDto;
 import com.spotride.spotride.model.user.model.User;
 import com.spotride.spotride.model.user.repository.UserRepository;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import com.spotride.spotride.model.user.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,6 @@ import static org.mockito.Mockito.when;
  */
 @ContextConfiguration(classes = {UserService.class, UserMapperImpl.class})
 @ExtendWith(SpringExtension.class)
-@SuppressFBWarnings(value = "SECHCP", justification = "Hardcoded password.")
 class UserServiceTest {
 
     private static final LocalDateTime DATE_TIME_NOW = LocalDateTime.now();
