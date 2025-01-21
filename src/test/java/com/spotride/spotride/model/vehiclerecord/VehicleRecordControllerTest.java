@@ -5,7 +5,6 @@ import com.spotride.spotride.model.vehiclerecord.dto.VehicleRecordResponseDto;
 import com.spotride.spotride.model.vehiclerecord.dto.request.VehicleRecordCreateRequestDto;
 import com.spotride.spotride.model.vehiclerecord.dto.request.VehicleRecordUpdateRequestDto;
 import com.spotride.spotride.model.vehiclerecord.service.VehicleRecordService;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,6 @@ import static org.mockito.Mockito.when;
 
 @ContextConfiguration(classes = VehicleRecordController.class)
 @ExtendWith(SpringExtension.class)
-@SuppressFBWarnings(value = "SECHCP", justification = "Hardcoded password.")
 class VehicleRecordControllerTest {
 
     @MockBean
