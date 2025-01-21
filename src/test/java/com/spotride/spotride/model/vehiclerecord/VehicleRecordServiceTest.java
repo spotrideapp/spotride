@@ -1,8 +1,14 @@
 package com.spotride.spotride.model.vehiclerecord;
 
+import com.spotride.spotride.model.user.model.User;
+import com.spotride.spotride.model.vehicle.model.Vehicle;
+import com.spotride.spotride.model.vehicle.repository.VehicleRepository;
 import com.spotride.spotride.model.vehiclephoto.model.VehiclePhoto;
 import com.spotride.spotride.model.vehiclerecord.dto.request.VehicleRecordCreateRequestDto;
 import com.spotride.spotride.model.vehiclerecord.dto.request.VehicleRecordUpdateRequestDto;
+import com.spotride.spotride.model.vehiclerecord.mapper.VehicleMapperHelper;
+import com.spotride.spotride.model.vehiclerecord.mapper.VehicleRecordMapper;
+import com.spotride.spotride.model.vehiclerecord.mapper.VehicleRecordMapperImpl;
 import com.spotride.spotride.model.vehiclerecord.model.VehicleRecord;
 import com.spotride.spotride.model.vehiclerecord.repository.VehicleRecordRepository;
 import com.spotride.spotride.model.vehiclerecord.service.VehicleRecordService;
@@ -35,6 +41,12 @@ class VehicleRecordServiceTest {
 
     @MockBean
     private VehicleRecordRepository mockVehicleRecordRepository;
+
+    @MockBean
+    private VehicleRepository mockVehicleRepository;
+
+    @MockBean
+    private VehicleMapperHelper mockVehicleMapperHelper;
 
     @Autowired
     private VehicleRecordMapper vehicleRecordMapper;
@@ -80,26 +92,68 @@ class VehicleRecordServiceTest {
 
     @Test
     void testCreateVehicleRecord() {
+        var user = User.builder()
+                .id(1L)
+                .username("john")
+                .password("password")
+                .email("john@example.com")
+                .firstName("John")
+                .lastName("Doe")
+                .createdAt(DATE_TIME_NOW)
+                .modifiedAt(null)
+                .build();
+
+        var vehicle = Vehicle.builder()
+                .id(1L)
+                .brand("Opel")
+                .model("Astra")
+                .generation("G")
+                .productYear(1999)
+                .bodyType("Estate")
+                .enginePower(75)
+                .engineType("Disel")
+                .engineDisplacement(1700)
+                .vehiclePhotoUrl("https://example.com")
+                .vehicleRecords(Collections.emptyList())
+                .createdAt(DATE_TIME_NOW)
+                .modifiedAt(null)
+                .build();
+
+        user.setVehicles(List.of(vehicle));
+
         var vehicleRecordCreateRequestDto = VehicleRecordCreateRequestDto.builder()
+                .vehicleId(1L)
                 .description("New description")
+                .build();
+
+        var savedVehiclePhoto = VehiclePhoto.builder()
+                .id(1L)
+                .url("http://test.url")
+                .createdAt(DATE_TIME_NOW)
+                .modifiedAt(DATE_TIME_NOW)
                 .build();
 
         var savedRecord = VehicleRecord.builder()
                 .id(1L)
+                .vehicle(vehicle)
                 .description("New description")
-                .vehiclePhotos(Collections.emptyList())
+                .vehiclePhotos(List.of(savedVehiclePhoto))
                 .createdAt(DATE_TIME_NOW)
                 .modifiedAt(DATE_TIME_NOW)
                 .build();
 
         when(mockVehicleRecordRepository.save(any(VehicleRecord.class))).thenReturn(savedRecord);
+        when(mockVehicleRepository.findById(vehicle.getId())).thenReturn(Optional.of(vehicle));
+        when(mockVehicleMapperHelper.mapIdByVehicle(vehicle)).thenReturn(1L);
 
         var vehicleRecord = vehicleRecordMapper.toEntity(vehicleRecordCreateRequestDto);
+        vehicleRecord.setVehicle(vehicle);
         var created = vehicleRecordService.create(vehicleRecordCreateRequestDto);
 
         assertNotNull(created);
         assertEquals("New description", created.getDescription());
-        assertEquals(Collections.emptyList(), created.getVehiclePhotos());
+        assertEquals("http://test.url", created.getVehiclePhotos().getFirst().getUrl());
+        assertEquals(vehicle.getId(), created.getVehicleId());
         verify(mockVehicleRecordRepository, times(1)).save(vehicleRecord);
     }
 

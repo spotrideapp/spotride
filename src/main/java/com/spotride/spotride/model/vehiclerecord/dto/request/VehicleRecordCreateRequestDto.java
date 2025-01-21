@@ -17,6 +17,9 @@ import java.util.List;
 @NoArgsConstructor
 public class VehicleRecordCreateRequestDto {
 
+    private Long vehicleId;
+
     private List<VehiclePhoto> vehiclePhotos;
+
     private String description;
 }

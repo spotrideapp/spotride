@@ -1,7 +1,7 @@
 package com.spotride.spotride.model.user;
 
-import com.spotride.spotride.model.user.dto.request.UserCreateRequestDto;
 import com.spotride.spotride.model.user.dto.UserResponseDto;
+import com.spotride.spotride.model.user.dto.request.UserCreateRequestDto;
 import com.spotride.spotride.model.user.dto.request.UserUpdateRequestDto;
 import com.spotride.spotride.model.user.model.User;
 import org.mapstruct.Mapper;

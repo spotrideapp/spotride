@@ -1,5 +1,6 @@
 package com.spotride.spotride.model.user.dto.request;
 
+import com.spotride.spotride.model.vehicle.model.Vehicle;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -9,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * User request DTO to create model.
@@ -40,4 +42,5 @@ public class UserCreateRequestDto {
     private LocalDate birthDate;
 
     private String city;
+    private List<Vehicle> vehicles;
 }

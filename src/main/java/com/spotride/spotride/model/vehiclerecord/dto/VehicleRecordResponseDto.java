@@ -18,6 +18,10 @@ import java.util.List;
 public class VehicleRecordResponseDto {
 
     private Long id;
+
+    private Long vehicleId;
+
     private List<VehiclePhoto> vehiclePhotos;
+
     private String description;
 }

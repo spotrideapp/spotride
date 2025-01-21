@@ -1,9 +1,9 @@
-package com.spotride.spotride.model.vehiclerecord.model;
+package com.spotride.spotride.model.vehicle.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.spotride.spotride.model.vehicle.model.Vehicle;
-import com.spotride.spotride.model.vehiclephoto.model.VehiclePhoto;
+import com.spotride.spotride.model.user.model.User;
+import com.spotride.spotride.model.vehiclerecord.model.VehicleRecord;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -27,31 +27,48 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * Vehicle record model.
+ * Vehicle model.
  */
 @Data
 @Builder
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "vehicle_records")
-public class VehicleRecord {
+@Table(name = "vehicles")
+public class Vehicle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "vehicle_id")
+    @JoinColumn(name = "user_id")
     @JsonBackReference
-    private Vehicle vehicle;
+    private User user;
 
-    @OneToMany(mappedBy = "vehicleRecord", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private String brand;
+
+    private String model;
+
+    private String generation;
+
+    private int productYear;
+
+    private String bodyType;
+
+    private String engineType;
+
+    private int enginePower;
+
+    private int engineDisplacement;
+
+    private String vehiclePhotoUrl;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "vehicle_id")
     @JsonManagedReference
-    private List<VehiclePhoto> vehiclePhotos;
-
-    private String description;
+    private List<VehicleRecord> vehicleRecords;
 
     @CreatedDate
     private LocalDateTime createdAt;

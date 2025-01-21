@@ -1,5 +1,6 @@
 package com.spotride.spotride.model.user.dto.request;
 
+import com.spotride.spotride.model.vehicle.model.Vehicle;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -9,6 +10,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.time.LocalDate;
 
 /**
@@ -44,4 +46,6 @@ public class UserUpdateRequestDto {
     private LocalDate birthDate;
 
     private String city;
+
+    private List<Vehicle> vehicles;
 }
