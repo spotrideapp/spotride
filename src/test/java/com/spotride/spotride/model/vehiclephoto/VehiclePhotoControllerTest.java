@@ -4,7 +4,6 @@ import com.spotride.spotride.model.vehiclephoto.controller.VehiclePhotoControlle
 import com.spotride.spotride.model.vehiclephoto.dto.VehiclePhotoResponseDto;
 import com.spotride.spotride.model.vehiclephoto.dto.request.VehiclePhotoUpdateRequestDto;
 import com.spotride.spotride.model.vehiclephoto.service.VehiclePhotoService;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,6 @@ import static org.mockito.Mockito.when;
 
 @ContextConfiguration(classes = VehiclePhotoController.class)
 @ExtendWith(SpringExtension.class)
-@SuppressFBWarnings(value = "SECHCP", justification = "Hardcoded password.")
 class VehiclePhotoControllerTest {
 
     @MockBean

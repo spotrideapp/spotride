@@ -6,16 +6,11 @@
       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.29.xsd">
 
     <changeSet id="1" author="andrey-shipulya">
-        <createTable tableName="vehicle_photos">
+        <createTable tableName="vehicle_records">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="vehicle_record_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="url" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
+            <column name="description" type="VARCHAR(255)"/>
             <column name="created_at" type="TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
@@ -23,13 +18,6 @@
                 <constraints nullable="true"/>
             </column>
         </createTable>
-
-        <addForeignKeyConstraint
-                baseTableName="vehicle_photos"
-                baseColumnNames="vehicle_record_id"
-                referencedTableName="vehicle_records"
-                referencedColumnNames="id"
-                constraintName="fk_vehicle_photos_vehicle_record"/>
     </changeSet>
 
 </databaseChangeLog>

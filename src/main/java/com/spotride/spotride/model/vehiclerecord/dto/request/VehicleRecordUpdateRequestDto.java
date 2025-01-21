@@ -1,27 +1,26 @@
-package com.spotride.spotride.model.vehiclephoto.dto.request;
+package com.spotride.spotride.model.vehiclerecord.dto.request;
 
 import com.spotride.spotride.model.vehiclephoto.model.VehiclePhoto;
-import com.spotride.spotride.model.vehiclerecord.model.VehicleRecord;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
- * Update DTO model for {@link VehiclePhoto}.
+ * Request DTO for entity update.
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class VehiclePhotoUpdateRequestDto {
+public class VehicleRecordUpdateRequestDto {
 
     @NotNull(message = "ID is required")
     private Long id;
-
-    @NotNull(message = "URL is required")
-    private String url;
-
-    private VehicleRecord vehicleRecord;
+    @NotNull(message = "Photos is required")
+    private List<VehiclePhoto> vehiclePhotos;
+    private String description;
 }

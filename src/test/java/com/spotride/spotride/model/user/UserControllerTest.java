@@ -5,7 +5,6 @@ import com.spotride.spotride.model.user.dto.UserResponseDto;
 import com.spotride.spotride.model.user.dto.request.UserCreateRequestDto;
 import com.spotride.spotride.model.user.dto.request.UserUpdateRequestDto;
 import com.spotride.spotride.model.user.service.UserService;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,6 @@ import static org.mockito.Mockito.when;
  */
 @ContextConfiguration(classes = UserController.class)
 @ExtendWith(SpringExtension.class)
-@SuppressFBWarnings(value = "SECHCP", justification = "Hardcoded password.")
 class UserControllerTest {
 
     @MockBean
