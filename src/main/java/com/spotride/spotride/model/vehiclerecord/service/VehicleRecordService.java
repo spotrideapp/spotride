@@ -1,6 +1,7 @@
 package com.spotride.spotride.model.vehiclerecord.service;
 
-import com.spotride.spotride.model.vehiclerecord.VehicleRecordMapper;
+import com.spotride.spotride.model.vehicle.repository.VehicleRepository;
+import com.spotride.spotride.model.vehiclerecord.mapper.VehicleRecordMapper;
 import com.spotride.spotride.model.vehiclerecord.dto.VehicleRecordResponseDto;
 import com.spotride.spotride.model.vehiclerecord.dto.request.VehicleRecordCreateRequestDto;
 import com.spotride.spotride.model.vehiclerecord.dto.request.VehicleRecordUpdateRequestDto;
@@ -23,6 +24,7 @@ public class VehicleRecordService {
 
     VehicleRecordRepository vehicleRecordRepository;
     VehicleRecordMapper vehicleRecordMapper;
+    VehicleRepository vehicleRepository;
 
     /**
      * Returns all entities.
@@ -61,6 +63,14 @@ public class VehicleRecordService {
                 vehiclePhoto.setVehicleRecord(vehicleRecord);
             }
         }
+
+        var vehicleOpt = vehicleRepository.findById(vehicleRecordCreateRequestDto.getVehicleId());
+        vehicleOpt.ifPresentOrElse(
+                vehicleRecord::setVehicle,
+                () -> {
+                    throw new RuntimeException(String.format("Vehicle record with id [%s] not found", vehicleRecord.getId()));
+                }
+        );
 
         return vehicleRecordMapper.toDto(vehicleRecordRepository.save(vehicleRecord));
     }

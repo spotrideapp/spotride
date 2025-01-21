@@ -1,6 +1,5 @@
 package com.spotride.spotride.model.vehiclerecord.dto.request;
 
-import com.spotride.spotride.model.vehicle.model.Vehicle;
 import com.spotride.spotride.model.vehiclephoto.model.VehiclePhoto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class VehicleRecordCreateRequestDto {
 
-    private Vehicle vehicle;
+    private Long vehicleId;
 
     private List<VehiclePhoto> vehiclePhotos;
 
