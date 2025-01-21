@@ -1,6 +1,6 @@
-package com.spotride.spotride.user.repository;
+package com.spotride.spotride.model.user.repository;
 
-import com.spotride.spotride.user.model.User;
+import com.spotride.spotride.model.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
