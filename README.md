@@ -15,7 +15,7 @@ docker build --tag=spotride:latest .
 
 ### Run docker compose:
 ```
-docker-compose up
+docker compose up
 ```
 or
 
