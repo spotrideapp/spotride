@@ -1,8 +1,10 @@
 package com.spotride.spotride.model.user.service;
 
+import com.spotride.spotride.authentication.dto.JwtAuthenticationRequestDto;
+import com.spotride.spotride.exception.EmailAlreadyTakenException;
 import com.spotride.spotride.model.user.UserMapper;
-import com.spotride.spotride.model.user.dto.request.UserCreateRequestDto;
 import com.spotride.spotride.model.user.dto.UserResponseDto;
+import com.spotride.spotride.model.user.dto.request.UserCreateRequestDto;
 import com.spotride.spotride.model.user.dto.request.UserUpdateRequestDto;
 import com.spotride.spotride.model.user.model.User;
 import com.spotride.spotride.model.user.repository.UserRepository;
@@ -10,6 +12,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,6 +29,7 @@ public final class UserService {
 
     UserMapper userMapper;
     UserRepository userRepository;
+    PasswordEncoder passwordEncoder;
 
     /**
      * Gets all users.
@@ -83,5 +87,33 @@ public final class UserService {
 
     public void delete(Long id) {
         userRepository.deleteById(id);
+    }
+
+    /**
+     * Registers a new user.
+     *
+     * @param authenticationRequest {@link JwtAuthenticationRequestDto} containing user registration details
+     * @return {@link UserResponseDto} for the registered user
+     * @throws RuntimeException if the email or username is already taken
+     */
+    public UserResponseDto registerUser(JwtAuthenticationRequestDto authenticationRequest) {
+        var email = authenticationRequest.email();
+        if (existsByEmail(email)) {
+            log.error("User with email {} already exists", email);
+            throw new EmailAlreadyTakenException(email);
+        }
+
+        var user = User.builder()
+                .email(email)
+                .password(passwordEncoder.encode(authenticationRequest.password()))
+                .build();
+
+
+        log.debug("User {} successfully registered", user.getId());
+        return userMapper.toDto(userRepository.save(user));
+    }
+
+    private boolean existsByEmail(String email) {
+        return userRepository.findAll().stream().anyMatch(user -> user.getEmail().equalsIgnoreCase(email));
     }
 }
