@@ -1,5 +1,6 @@
 package com.spotride.spotride.model.user;
 
+import com.spotride.spotride.authentication.dto.JwtAuthenticationRequestDto;
 import com.spotride.spotride.model.user.dto.request.UserCreateRequestDto;
 import com.spotride.spotride.model.user.dto.request.UserUpdateRequestDto;
 import com.spotride.spotride.model.user.model.User;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -36,6 +38,9 @@ class UserServiceTest {
 
     @MockBean
     private UserRepository mockUserRepository;
+
+    @MockBean
+    PasswordEncoder mockPasswordEncoder;
 
     @Autowired
     private UserMapper userMapper;
@@ -191,5 +196,14 @@ class UserServiceTest {
         userService.delete(1L);
 
         verify(mockUserRepository, times(1)).deleteById(1L);
+    }
+
+    @Test
+    void testRegisterUser() {
+        var authenticationRequest = new JwtAuthenticationRequestDto("john@example.com", "password");
+
+        when(mockPasswordEncoder.encode(authenticationRequest.password())).thenReturn("password");
+
+        userService.registerUser(authenticationRequest);
     }
 }
